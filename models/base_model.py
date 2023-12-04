@@ -14,11 +14,11 @@ class BaseModel():
 
     def __str__(self):
         """return string info"""
-        return ('[' + type(self).__name__ + '] (' + str(self.id) +
-               ') ' + str(self.__dict__))
-    
+        return ('[' + type(self).__name__ + '] ('
+                + str(self.id) + ') ' + str(self.__dict__))
+
     def save(self):
-        """ save / update """ 
+        """ save / update """
         self.updated_at = str(datetime.now())
 
     def to_dict(self):
