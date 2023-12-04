@@ -1,9 +1,17 @@
 import cmd
 
-class Console(cmd.Cmd):
+class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
 
-    def do_quit(self):
+    def do_quit(self, arg):
         return True
+    
+    do_EOF = do_quit
 
-Console().cmdloop()
+    def do_help(self, arg):
+        cmd.Cmd.do_help(self, arg)
+
+    def emptyline(self):
+        pass
+     
+HBNBCommand().cmdloop()
