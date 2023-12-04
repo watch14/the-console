@@ -1,7 +1,6 @@
 """basemodel"""
 import uuid
 from datetime import datetime
-import json
 
 
 class BaseModel():
@@ -24,8 +23,8 @@ class BaseModel():
 
     def to_dict(self):
         """return a dictionary of the instance"""
-        to_dict = self.__dict__.copy()
-        to_dict['__class__'] = type(self).__name__
-        to_dict['created_at'] = self.created_at.isoformat()
-        to_dict['updated_at'] = self.updated_at.isoformat()
-        return to_dict
+        new_dict = self.__dict__.copy()
+        new_dict['__class__'] = type(self).__name__
+        new_dict['created_at'] = self.created_at.isoformat()
+        new_dict['updated_at'] = self.updated_at.isoformat()
+        return new_dict
