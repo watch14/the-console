@@ -1,2 +1,0 @@
-def emptyline(self):
-        pass
