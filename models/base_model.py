@@ -2,7 +2,7 @@
 import uuid
 from datetime import datetime
 import json
-#import models
+
 
 class BaseModel():
     """BaseModel Class"""
@@ -10,8 +10,8 @@ class BaseModel():
     def __init__(self, *args, **kwargs):
         """Public instance attributes"""
         self.id = str(uuid.uuid4())
-        self.created_at = str(datetime.now())
-        self.updated_at = str(datetime.now())
+        self.created_at = datetime.now()
+        self.updated_at = datetime.now()
 
     def __str__(self):
         """return string info"""
@@ -23,4 +23,9 @@ class BaseModel():
         self.updated_at = str(datetime.now())
 
     def to_dict(self):
-        datetime.strptime(self.created_at, "%Y-%m-%d %H:%M:%S.%f")
+        """return a dictionary of the instance"""
+        to_dict = self.__dict__.copy()
+        to_dict['__class__'] = type(self).__name__
+        to_dict['created_at'] = self.created_at.isoformat()
+        to_dict['updated_at'] = self.updated_at.isoformat()
+        return to_dict
