@@ -23,7 +23,6 @@ class BaseModel():
                 if key == "id":
                     self.id = value
 
-
     def __str__(self):
         """return string info"""
         name = self.__class__.__name__
@@ -41,7 +40,7 @@ class BaseModel():
         new_dict['updated_at'] = self.updated_at.isoformat()
         return new_dict
     
-    
+
 if __name__ == "__main__":
     my_model = BaseModel()
     my_model.name = "My_First_Model"
