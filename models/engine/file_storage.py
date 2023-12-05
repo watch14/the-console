@@ -7,5 +7,5 @@ class FileStorage ():
 
     def __init__(self):
         """attributes"""
-        self.__file_path = 0
-        self.__objects = 0
+        self.__file_path = "file.json"
+        self.__objects = {}
