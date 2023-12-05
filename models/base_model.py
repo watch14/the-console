@@ -1,7 +1,8 @@
 """BaseModel"""
 import uuid
 from datetime import datetime
-import models
+from models import storage
+
 
 class BaseModel():
     """BaseModel Class"""
@@ -22,7 +23,8 @@ class BaseModel():
                     self.updated_at = datetime.strptime(value, time_form)
                 if key == "id":
                     self.id = value
-        models.storage.new(self)
+
+        storage.new(self)
 
     def __str__(self):
         """return string info"""
@@ -32,7 +34,7 @@ class BaseModel():
     def save(self):
         """ save / update """
         self.updated_at = datetime.utcnow()
-        models.storage.save()
+        storage.save()
 
     def to_dict(self):
         """return a dictionary of the instance"""
@@ -58,10 +60,14 @@ if __name__ == "__main__":
         print("\t{}: ({}) - {}".format(key, type(my_model_json[key]), my_model_json[key]))
 
     print("--")
+    print("--")
+
     my_new_model = BaseModel(**my_model_json)
     print(my_new_model.id)
     print(my_new_model)
     print(type(my_new_model.created_at))
 
     print("--")
+    print("--")
+    
     print(my_model is my_new_model)
