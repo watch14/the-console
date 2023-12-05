@@ -1,5 +1,6 @@
 """FileStorage: serializes and deserializes"""
 import json
+import os
 import models
 
 class FileStorage ():
@@ -31,13 +32,9 @@ class FileStorage ():
 
     def reload(self):
         """Deserialize JSON"""
-        try:
+        if (os.path.isfile(FileStorage.__file_path)):
             with open(FileStorage.__file_path, "r") as f:
-                obj_dic = json.load(f)
-
-            for value in obj_dic.values():
-                n_cls = value["__class__"]
-                del value["__class__"]
-                self.new(eval(n_cls)(**value))
-        except FileNotFoundError:
-            return
+                de_json = json.load(f)
+                for key, value in de_json.items():
+                    FileStorage.__objects[key] = eval(
+                        value['__class__'])(**value)
