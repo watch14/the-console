@@ -1,7 +1,11 @@
 """FileStorage: serializes and deserializes"""
 import json
 import os
-import models
+import uuid
+from datetime import datetime
+from models.base_model import BaseModel
+
+
 
 class FileStorage ():
     """FileStorage Class"""
@@ -12,7 +16,7 @@ class FileStorage ():
     def all(self):
         """returns __objects"""
         return FileStorage.__objects
-    
+
     def new(self, obj):
         """set obj"""
         k_o = f"{obj.__class__.__name__}.{obj.id}"
@@ -36,5 +40,3 @@ class FileStorage ():
                 for key, value in de_json.items():
                     FileStorage.__objects[key] = eval(
                         value['__class__'])(**value)
-                    
-
