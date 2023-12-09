@@ -3,6 +3,7 @@ import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
+import json
 
 
 
@@ -36,10 +37,32 @@ class HBNBCommand(cmd.Cmd):
             new_inst.save()
             print(new_inst.id)
 
-    def do_show(self, args):
+    def do_show(self, arg):
         """Prints the string representation of an instance based on the class name and id"""
-        pass
-     
+        ars = split(arg)
+        if len(ars) == 0:
+            print("** class name missing **")
+        elif ars[0] not in self.all_classes:
+            print("** class doesn't exist **")
+        elif not ars[1]:
+            print("** instance id missing **")
+        else:
+            key = f"{ars[0]}.{ars[1]}"
+            if key in storage.all():
+                print(storage.all()[key])
+            else:
+                print('** no instance found **')
+        
+    def do_destroy(self, arg):
+        ars = split(arg)
+        if len(ars) == 0:
+            print("** class name missing **")
+        elif ars[0] not in self.all_classes:
+            print("** class doesn't exist **")
+        elif not ars[1]:
+            print("** instance id missing **")
+        else:
+            key = f"{ars[0]}.{ars[1]}"
      
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
