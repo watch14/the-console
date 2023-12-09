@@ -3,14 +3,14 @@ import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
-import json
+from models.user import User
 
 
 
 class HBNBCommand(cmd.Cmd):
     """ cmd """
     prompt = "(hbnb) "
-    all_classes = ["BaseModel"]
+    all_classes = ["BaseModel", "User"]
 
     def do_quit(self, arg):
         """" Quit hbnb """
@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         elif args[0] not in self.all_classes:
             print("** class doesn't exist **")
         else:
-            new_inst = BaseModel()
+            new_inst = eval(f"{args[0]}()")
             new_inst.save()
             print(new_inst.id)
 
@@ -114,9 +114,6 @@ class HBNBCommand(cmd.Cmd):
                 setattr(instance, new_key, new_val)
                 instance.save()
                 
-                
-
-
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
