@@ -54,6 +54,7 @@ class HBNBCommand(cmd.Cmd):
                 print('** no instance found **')
         
     def do_destroy(self, arg):
+        """delete"""
         ars = split(arg)
         if len(ars) == 0:
             print("** class name missing **")
@@ -63,6 +64,27 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
         else:
             key = f"{ars[0]}.{ars[1]}"
-     
+            if key in storage.all():
+                del storage.all()[key]
+                storage.save()
+            else:
+                print('** no instance found **')
+
+    def do_all(self, arg):
+        """ Prints all instances based or not on the class name. """
+        ars = split(arg)
+        if  len(ars) == 0:
+            for inst in storage.all().values():
+                print(str(inst))
+        elif ars[0] not in self.all_classes:
+            print("** class doesn't exist **")
+        else:
+            print([str(v) for k, v in storage.all().items() if ars[0] in k])
+
+    def do_update(self, arg):
+        pass
+
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
