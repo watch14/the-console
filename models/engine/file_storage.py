@@ -1,10 +1,16 @@
+#!/usr/bin/python3
 """FileStorage: serializes and deserializes"""
 import json
-import os
 import uuid
+import os
 from datetime import datetime
 from models.base_model import BaseModel
 from models.user import User
+# from models.state import State
+# from models.city import City
+# from models.amenity import Amenity
+# from models.place import Place
+# from models.review import Review
 
 
 class FileStorage ():
@@ -39,4 +45,4 @@ class FileStorage ():
                 de_json = json.load(f)
                 for key, value in de_json.items():
                     FileStorage.__objects[key] = eval(
-                        value['__class__'])(**value)
+                            value['__class__'])(**value)

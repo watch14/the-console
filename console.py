@@ -4,22 +4,28 @@ from shlex import split
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-
+# from models.place import Place
+# from models.state import State
+# from models.city import City
+# from models.amenity import Amenity
+# from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """ cmd """
+
     prompt = "(hbnb) "
-    all_classes = ["BaseModel", "User"]
+    all_classes = [
+            "BaseModel", "User", "Amenity", "Place", "Review", "State", "City"
+            ]
 
     def do_quit(self, arg):
-        """" Quit hbnb """
+        """ Quit hbnb """
         return True
-    
     do_EOF = do_quit
 
     def do_help(self, arg):
-        """" help hbnb """
+        """ help hbnb """
         cmd.Cmd.do_help(self, arg)
 
     def emptyline(self):
@@ -38,13 +44,14 @@ class HBNBCommand(cmd.Cmd):
             print(new_inst.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id"""
+        """Prints the string representation of
+        an instance based on the class name and id"""
         ars = split(arg)
         if len(ars) == 0:
             print("** class name missing **")
         elif ars[0] not in self.all_classes:
             print("** class doesn't exist **")
-        elif not ars[1]:
+        elif len(ars) == 1:
             print("** instance id missing **")
         else:
             key = f"{ars[0]}.{ars[1]}"
@@ -52,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
                 print(storage.all()[key])
             else:
                 print('** no instance found **')
-        
+
     def do_destroy(self, arg):
         """delete"""
         ars = split(arg)
@@ -73,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, arg):
         """ Prints all instances based or not on the class name. """
         ars = split(arg)
-        if  len(ars) == 0:
+        if len(ars) == 0:
             for inst in storage.all().values():
                 print(str(inst))
         elif ars[0] not in self.all_classes:
@@ -113,7 +120,37 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(instance, new_key, new_val)
                 instance.save()
-                
+    def do_count(self, arg):
+        """count class nb"""
+        ars = split(arg)
+        class_nb = 0
+        for k in storage.all().values():
+            if ars[0] == k.__class__.__name__:
+                class_nb += 1
+        print(class_nb)
+
+    def default(self, arg):
+        """default : not recognisable commands"""
+
+        ars = arg.split(".")
+        cls_name = ars[0]
+        temp = ars[1].split("(")
+        com = temp[0]
+        typ_dic = {
+                'all': self.do_all,
+                'count': self.do_count,
+                'show': self.do_show,
+                'destroy': self.do_destroy,
+                'update': self.do_update
+                }
+        if com in typ_dic.keys():
+            return typ_dic[com](f"{cls_name}")
+        else:
+            if not cls_name:
+                print("** class name missing **")
+                return
+        
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
