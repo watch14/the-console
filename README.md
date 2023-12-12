@@ -39,7 +39,7 @@ quit: Exit the command interpreter.
   (hbnb) help
   Documented commands (type help <topic>):
   ========================================
-  EOF   help   create   quit ...
+  EOF  all  count  create  destroy  help  quit  show  update
 
   (hbnb) quit
   $

@@ -1,14 +1,15 @@
+#!/usr/bin/python3
 """ Cmd hbnbClass """
 import cmd
 from shlex import split
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
-# from models.place import Place
-# from models.state import State
-# from models.city import City
-# from models.amenity import Amenity
-# from models.review import Review
+from models.place import Place
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
@@ -67,7 +68,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif ars[0] not in self.all_classes:
             print("** class doesn't exist **")
-        elif not ars[1]:
+        elif len(ars) < 2:
             print("** instance id missing **")
         else:
             key = f"{ars[0]}.{ars[1]}"
@@ -120,6 +121,7 @@ class HBNBCommand(cmd.Cmd):
                     pass
                 setattr(instance, new_key, new_val)
                 instance.save()
+
     def do_count(self, arg):
         """count class nb"""
         ars = split(arg)
@@ -138,10 +140,7 @@ class HBNBCommand(cmd.Cmd):
         com = temp[0]
         typ_dic = {
                 'all': self.do_all,
-                'count': self.do_count,
-                'show': self.do_show,
-                'destroy': self.do_destroy,
-                'update': self.do_update
+                'count': self.do_count
                 }
         if com in typ_dic.keys():
             return typ_dic[com](f"{cls_name}")
@@ -149,7 +148,6 @@ class HBNBCommand(cmd.Cmd):
             if not cls_name:
                 print("** class name missing **")
                 return
-        
 
 
 if __name__ == '__main__':
