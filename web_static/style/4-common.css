@@ -5,7 +5,7 @@ body{
     justify-content: space-between ;
     color: #484848;
     font-size: 14px;
-    font-family: 'Circular,"Helvetica Neue",Helvetica,Arial,sans-serif';
+    font-family: "Circular", "Helvetica Neue", Helvetica, Arial, sans-serif, sans-serif;
 }
 .container{
     width: 100%;
