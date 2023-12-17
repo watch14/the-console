@@ -64,6 +64,7 @@
 .filters li{
     list-style-type: none;
     padding: -10px;
+    margin-bottom: 5px;
 }
 
 .locations .popover{
@@ -81,6 +82,7 @@
     display: block;
 }
 .amenities .popover{
+    padding-top: 20px;
     margin-top: 0px;
     background-color:  #FAFAFA;
     border: #DDDDDD 1px solid;
