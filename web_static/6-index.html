@@ -1,41 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>AirBnB clone</title>
-        <link rel="stylesheet" href="style/5-header.css">
-        <link rel="stylesheet" href="style/5-common.css">
-        <link rel="stylesheet" href="style/5-footer.css">
-        <link rel="stylesheet" href="style/5-filters.css">
-    </head>
 
-    <body class="body">
-        <header class="header">
-            <img class="header__logo" src="images/icon.png" alt="07">
-        </header>
+<head>
+	<title>AirBnB clone</title>
+	<link rel="stylesheet" href="style/6-header.css">
+	<link rel="stylesheet" href="style/6-common.css">
+	<link rel="stylesheet" href="style/6-footer.css">
+	<link rel="stylesheet" href="style/6-filters.css">
+</head>
 
-        <div class="container">
+<body class="body">
+	<header class="header">
+		<img class="header__logo" src="images/icon.png" alt="07">
+	</header>
 
-            <section class="filters">
+	<div class="container">
 
-                <div class="locations">
-                    <h3>States </h3>
-                    <h4>Tunis, Mannouba...</h4>
-                </div>
+		<section class="filters">
 
-                <div class="amenities">
-                    <h3>Amenities</h3>
-                    <h4>Test_1, Test_2...</h4>
-                </div>
+			<div class="locations">
+				<h3>States </h3>
+				<h4>Tunis, Mannouba...</h4>
 
-                <div class="empty"></div>
+				<ul class="popover">
+					
+						<li><h2>Tunis City</h2></li>
+						<ul>
+							<li>Manzah 1</li>
+							<li>Mohamed El Khamed</li>
+						</ul>
+					
+					
+						<li><h2>Manouba</h2></li>
+						<ul>
+							<li>Boudreya</li>
+							<li>Hay Ben Nasr</li>
+						</ul>
+					
+				</ul>
+			</div>
 
-                <button>Search</button>
+			<div class="amenities">
+				<h3>Amenities</h3>
+				<h4>Test_1, Test_2...</h4>
 
-            </section>
-        </div>
+				<ul class="popover">
+					
+					<li><h2>Test_1</h2></li>
+					<ul>
+						<li>page_1</li>
+						<li>page_2</li>
+					</ul>
+				
+				
+					<li><h2>Test_2</h2></li>
+					<ul>
+						<li>page_1</li>
+						<li>page_2</li>
+					</ul>
+				
+				</ul>
 
-        <footer class="footer">
-        <p class="footer__text">Best School</p>
-        </footer>
-    </body>
+			</div>
+
+			<div class="empty"></div>
+
+			<button>Search</button>
+
+		</section>
+	</div>
+
+	<footer class="footer">
+		<p class="footer__text">Best School</p>
+	</footer>
+</body>
+
 </html>
